@@ -72,15 +72,6 @@
         xterm
       ];
     };
-#   services.greetd = {
-#     enable = true;
-#     settings = {
-#       default_session = {
-#         command = "${pkgs.greetd.greetd}/bin/agreety --cmd qtile start";
-#       };
-#     };
-#     vt = 1;
-#   };
 
   # Misc. Services 
     services = {
@@ -182,6 +173,21 @@
       LC_PAPER = "en_US.UTF-8";
       LC_TELEPHONE = "en_US.UTF-8";
       LC_TIME = "en_US.UTF-8";
+    };
+    
+  # Power Management
+    powerManagement = {
+      enable = true;
+#     powertop.enable = true;
+    };
+
+    services = {
+      auto-cpufreq.enable = true;
+      tlp.enable = true;
+      upower.enable = true;
+#     udev.extraRules = ''
+#       ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="3297", ATTR{idProduct}=="1969", TEST=="power/control", ATTR{power/control}="on"
+#     '';
     };
 
   # DO NOT ALTER OR DELETE
