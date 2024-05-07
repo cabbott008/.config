@@ -43,8 +43,8 @@
         mouse.naturalScrolling = true;
       };
       displayManager = {
-        lightdm.enable = true;
-#        startx.enable = true;
+        sddm.enable = true;
+#       startx.enable = true;
 #       defaultSession = "none+qtile"; 
         sessionCommands = ''
           ${pkgs.sxhkd}/bin/sxhkd &
@@ -65,6 +65,15 @@
         xterm
       ];
     };
+#   services.greetd = {
+#     enable = true;
+#     settings = {
+#       default_session = {
+#         command = "${pkgs.greetd.greetd}/bin/agreety --cmd qtile start";
+#       };
+#     };
+#     vt = 1;
+#   };
 
   # Misc. Services 
     services = {
@@ -94,14 +103,13 @@
   # $ nix search wget
     environment.systemPackages = with pkgs; [
       networkmanagerapplet
+      fish
       wget
       tree
       git
-      gh
       sxhkd
       feh
       neovim
-      fish
       vifm
       rofi
       rofimoji
@@ -110,7 +118,6 @@
       obsidian
       audacity 
       kitty
-      pass
       fzf
       fd
       btop
@@ -135,7 +142,6 @@
       flatpak
       obs-studio
       pcmanfm
-      rsync
       gimp
       fastfetch
       remmina
