@@ -75,7 +75,7 @@
 
   # Misc. Services 
     services = {
-      gnome3.gnome-keyring.enable = true;
+      gnome.gnome-keyring.enable = true;
       openssh.enable = true;
       printing.enable = true;
       udisks2.enable = true;
@@ -93,64 +93,6 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-
-  # Allow unfree packages
-    nixpkgs.config = {
-      allowUnfree = true;
-    };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-    environment.systemPackages = with pkgs; [
-      networkmanagerapplet
-      fish
-      wget
-      tree
-      git
-      sxhkd
-      feh
-      neovim
-      vifm
-      rofi
-      rofimoji
-      trash-cli
-      vivaldi
-      obsidian
-      audacity 
-      kitty
-      fzf
-      fd
-      btop
-      eza
-      ripgrep
-      ffmpeg
-      flameshot
-      nh
-      nix-output-monitor
-      nvd
-      pavucontrol
-      libqalculate
-      bluez
-      bluez-tools
-      bluetuith
-      zathura
-      vlc
-      yt-dlp
-      audacity
-      dunst
-      mpv
-      flatpak
-      obs-studio
-      pcmanfm
-      gimp
-      fastfetch
-      remmina
-      unzip
-    ];
-
-  # Fonts
-    fonts.packages = with pkgs; [
-    ];
   
   # Define a user account. 
     users.users.ca = {
@@ -189,7 +131,65 @@
 #       ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="3297", ATTR{idProduct}=="1969", TEST=="power/control", ATTR{power/control}="on"
 #     '';
     };
+  
+  # Fonts
+    fonts.packages = with pkgs; [
+    ];
 
+  # Allow unfree packages
+    nixpkgs.config = {
+      allowUnfree = true;
+    };
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+    environment.systemPackages = with pkgs; [
+      networkmanagerapplet
+      fish
+      wget
+      tree
+      feh
+      git
+      sxhkd
+      neovim
+      vifm
+      rofi
+      rofimoji
+      trash-cli
+      vivaldi
+      obsidian
+      audacity 
+      kitty
+      fzf
+      fd
+      btop
+      eza
+      ripgrep
+      ffmpeg
+      flameshot
+      nh
+      nix-output-monitor
+      nvd
+      pavucontrol
+      libqalculate
+      bluez
+      bluez-tools
+      bluetuith
+      zathura
+      vlc
+      yt-dlp
+      audacity
+      dunst
+      mpv
+      flatpak
+      obs-studio
+      pcmanfm
+      gimp
+      fastfetch
+      remmina
+      unzip
+    ];
+  
   # DO NOT ALTER OR DELETE
     system.stateVersion = "24.05";
 }

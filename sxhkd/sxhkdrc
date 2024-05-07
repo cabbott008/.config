@@ -26,11 +26,11 @@ control + alt + f
 super + b
     vivaldi
 
-control + b
-    buckle -f -g 31 -s 0 &
+# control + b
+#    buckle -f -g 31 -s 0 &
 
-control + shift + b
-    kill buckle
+#control + shift + b
+#    kill buckle
 
 #Btop
 control + p
