@@ -43,9 +43,16 @@
         mouse.naturalScrolling = true;
       };
       displayManager = {
-        sddm.enable = true;
-#       startx.enable = true;
-#       defaultSession = "none+qtile"; 
+        sddm = {
+          enable = true;
+          autoLogin.relogin = true;
+          settings = {
+            Autologin = {
+              Session = "none+qtile";
+              User = "ca";
+            };
+          };
+        };  
         sessionCommands = ''
           ${pkgs.sxhkd}/bin/sxhkd &
         '';
@@ -81,6 +88,8 @@
       openssh.enable = true;
       printing.enable = true;
       udisks2.enable = true;
+      devmon.enable = true;
+      gvfs.enable = true;
     };
   
   # Enable sound.
