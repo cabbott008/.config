@@ -122,14 +122,17 @@
       enable = true;
 #     powertop.enable = true;
     };
-
     services = {
+      logind = {
+        powerKey = "hybrid-sleep";
+        powerKeyLongPress = "poweroff";
+      };
       auto-cpufreq.enable = true;
       tlp.enable = true;
-      upower.enable = true;
-#     udev.extraRules = ''
-#       ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="3297", ATTR{idProduct}=="1969", TEST=="power/control", ATTR{power/control}="on"
-#     '';
+      upower = {
+        enable = true;
+        ignoreLid = true;
+      };
     };
   
   # Fonts
