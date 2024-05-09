@@ -1,6 +1,6 @@
 ####### Special Config mpNix.nix #######
 
-{ config, inputs, lib, modulesPath, ... }:
+{ config, inputs, lib, modulesPath, home-manager, ... }:
 
 {
   imports = [
@@ -11,4 +11,11 @@
     ];
 
     networking.hostName = "mpNix";
+
+#   home-manager = {
+#     extraSpecialArgs = { inherit inputs;};
+#     users = {
+#       "ca" = import ../../home.nix;
+#     };
+#   };
 }

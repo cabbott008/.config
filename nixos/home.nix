@@ -1,21 +1,27 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, home-manager, ... }:
 
 {
-  home.username = "ca";
-  home.homeDirectory = "/home/ca";
+  home = {
+    stateVersion = "24.05";
+    username = "ca";
+    homeDirectory = lib.mkForce "/home/ca";
+    
+    sessionVariables = {
+    };
 
-  home.packages = [
-  ];
-
-  home.file = {
-  };
-
-  home.sessionVariables = {
-    # EDITOR = "emacs";
+    packages = [
+    ];
+    
+    file = {
+    };
   };
 
   programs = {
-    home-manager.enable = true;
+    home-manager = {
+      enable = true;
+#     backupFileExtension = "backup";
+    };  
+    fish.enable = true;
     bash = {
       enable = true;
       bashrcExtra = ''
@@ -25,12 +31,11 @@
         fi
       '';
     };
+    
     git = {
       enable = true;
       userName = "cabbott008";
       userEmail = "curtisabbott@me.com";
     };
   };
-
-  home.stateVersion = "23.11"; # DO NOT ALTER or DELETE
 }
