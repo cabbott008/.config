@@ -21,7 +21,6 @@
       enable = true;
 #     backupFileExtension = "backup";
     };  
-    fish.enable = true;
     bash = {
       enable = true;
       bashrcExtra = ''

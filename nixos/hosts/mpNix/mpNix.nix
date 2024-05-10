@@ -12,10 +12,10 @@
 
     networking.hostName = "mpNix";
 
-#   home-manager = {
-#     extraSpecialArgs = { inherit inputs;};
-#     users = {
-#       "ca" = import ../../home.nix;
-#     };
-#   };
+    home-manager = {
+      extraSpecialArgs = { inherit inputs;};
+      users = {
+        "ca" = import ../../home.nix;
+      };
+    };
 }
