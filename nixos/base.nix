@@ -169,6 +169,7 @@
   environment.systemPackages = with pkgs; [
     networkmanagerapplet
     neovim
+    xclip
     fish
     wget
     tree
