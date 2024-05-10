@@ -170,6 +170,7 @@
     networkmanagerapplet
     neovim
     xclip
+    clipmenu
     fish
     wget
     tree
