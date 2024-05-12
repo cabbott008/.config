@@ -13,7 +13,7 @@ set sort=+dir,+iname,-mode
 set tabscope=pane
 set relativenumber number
 set dirsize=nitems
-set vicmd=nvim
+set vicmd=hx
 set syscalls
 set dotdirs=
 
@@ -121,12 +121,12 @@ mark k ~/Sources/qmk_firmware/keyboards/moonlander/keymaps/FlowHD keymap.c
 " %m run the command in a menu window
 
 command! df df -h %m 2> /dev/null
-command! diff nvim -d %f %F
+command! diff hx -d %f %F
 command! zip zip -r %f.zip %f
 command! run !! ./%f
 command! make !!make %a
 command! mkcd :mkdir %a | cd %a
-command! vgrep nvim "+grep %a"
+command! vgrep hx "+grep %a"
 command! reload :write | restart
 command! mkd :mkdir %a
 command! mkf :touch %a
@@ -224,7 +224,7 @@ fileviewer *.pdf
         "\ batcat %f
         \ cat %f
     filextype *.sh,*.txt,*.config,*.conf,*.vim,*.rc,*.*rc,*.h
-        \ nvim %f
+        \ hx %f
 
 " GETTING ICONS TO DISPLAY IN VIFM
 " You need the next 14 lines!

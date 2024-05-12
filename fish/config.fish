@@ -5,19 +5,19 @@ set -e fish_user_paths
 set -U fish_user_paths $HOME/.local/bin $HOME/Applications /var/lib/flatpak/exports/bin/ $fish_user_paths
 
 ### EXPORT ###
-set fish_greeting                                 # Supresses fish's intro message
-set TERM "kitty"                         # Sets the terminal type
-set EDITOR "nvim"                 # $EDITOR use nvim in terminal
-set VISUAL "nvim"              # $VISUAL use Emacs in GUI mode
-set GIT_EDITOR "nvim"
+set fish_greeting # Supresses fish's intro message
+set TERM kitty # Sets the terminal type
+set EDITOR hx # $EDITOR use nvim in terminal
+set VISUAL hx # $VISUAL use Emacs in GUI mode
+set GIT_EDITOR hx
 
 ### "nvim" as manpager
-set -x MANPAGER "nvim +Man!"
+set -x MANPAGER "hx +Man!"
 
 ### SET EITHER DEFAULT EMACS MODE OR VI MODE ###
 function fish_user_key_bindings
-  # fish_default_key_bindings
-  fish_vi_key_bindings
+    # fish_default_key_bindings
+    fish_vi_key_bindings
 end
 ### END OF VI MODE ###
 
@@ -30,44 +30,45 @@ set fish_color_param brcyan
 
 ### FUNCTIONS ###
 # Enable command history search via fzf.                                    
-function reverse_history_search                                    
-  history | fzf --no-sort | read -l command                                    
-  if test $command                                    
-    commandline -rb $command                                    
-  end                                    
-end                                    
-                                    
-function fish_user_key_bindings                                    
-  bind -M default / reverse_history_search                                    
-end 
+function reverse_history_search
+    history | fzf --no-sort | read -l command
+    if test $command
+        commandline -rb $command
+    end
+end
+
+function fish_user_key_bindings
+    bind -M default / reverse_history_search
+end
 
 # bind \"\cr\" fzf-history-widget
 # Functions needed for !! and !$
 function __history_previous_command
-  switch (commandline -t)
-  case "!"
-    commandline -t $history[1]; commandline -f repaint
-  case "*"
-    commandline -i !
-  end
+    switch (commandline -t)
+        case "!"
+            commandline -t $history[1]
+            commandline -f repaint
+        case "*"
+            commandline -i !
+    end
 end
 
 function __history_previous_command_arguments
-  switch (commandline -t)
-  case "!"
-    commandline -t ""
-    commandline -f history-token-search-backward
-  case "*"
-    commandline -i '$'
-  end
+    switch (commandline -t)
+        case "!"
+            commandline -t ""
+            commandline -f history-token-search-backward
+        case "*"
+            commandline -i '$'
+    end
 end
 # The bindings for !! and !$
-if [ "$fish_key_bindings" = "fish_vi_key_bindings" ];
-  bind -Minsert ! __history_previous_command
-  bind -Minsert '$' __history_previous_command_arguments
+if [ "$fish_key_bindings" = fish_vi_key_bindings ]
+    bind -Minsert ! __history_previous_command
+    bind -Minsert '$' __history_previous_command_arguments
 else
-  bind ! __history_previous_command
-  bind '$' __history_previous_command_arguments
+    bind ! __history_previous_command
+    bind '$' __history_previous_command_arguments
 end
 
 # Function for creating a backup file
@@ -83,8 +84,8 @@ end
 function copy
     set count (count $argv | tr -d \n)
     if test "$count" = 2; and test -d "$argv[1]"
-	set from (echo $argv[1] | trim-right /)
-	set to (echo $argv[2])
+        set from (echo $argv[1] | trim-right /)
+        set to (echo $argv[2])
         command cp -r $from $to
     else
         command cp $argv
@@ -158,20 +159,20 @@ alias vim='nvim'
 
 # Changing "ls" to "exa"
 alias ls='eza -al --color=always --group-directories-first' # my preferred listing
-alias la='eza -a --color=always --group-directories-first'  # all files and dirs
-alias ll='eza -l --color=always --group-directories-first'  # long format
+alias la='eza -a --color=always --group-directories-first' # all files and dirs
+alias ll='eza -l --color=always --group-directories-first' # long format
 alias lt='eza -aT --color=always --group-directories-first --level=3' # tree listing
 alias tree='tree -C --dirsfirst' #Colorized tree with Directories first
 alias l.='eza -a | grep -E "^\."'
 
 # pacman and yay
-alias pacsyu='sudo pacman -Syu'                  # update only standard pkgs
-alias pacsyyu='sudo pacman -Syyu'                # Refresh pkglist & update standard pkgs
-alias yaysua='yay -Sua --noconfirm'              # update only AUR pkgs (yay)
-alias yaysyu='yay -Syu --noconfirm'              # update standard pkgs and AUR pkgs (yay)
-alias parsua='paru -Sua --noconfirm'             # update only AUR pkgs (paru)
-alias parsyu='paru -Syu --noconfirm'             # update standard pkgs and AUR pkgs (paru)
-alias unlock='sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
+alias pacsyu='sudo pacman -Syu' # update only standard pkgs
+alias pacsyyu='sudo pacman -Syyu' # Refresh pkglist & update standard pkgs
+alias yaysua='yay -Sua --noconfirm' # update only AUR pkgs (yay)
+alias yaysyu='yay -Syu --noconfirm' # update standard pkgs and AUR pkgs (yay)
+alias parsua='paru -Sua --noconfirm' # update only AUR pkgs (paru)
+alias parsyu='paru -Syu --noconfirm' # update standard pkgs and AUR pkgs (paru)
+alias unlock='sudo rm /var/lib/pacman/db.lck' # remove pacman lock
 alias cleanup='sudo pacman -Rns (pacman -Qtdq)' # remove orphaned packages### FZF
 # Pacman
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --exact +s'
@@ -199,8 +200,8 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 # adding flags
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
+alias df='df -h' # human-readable sizes
+alias free='free -m' # show sizes in MB
 alias lynx='lynx -cfg=~/.lynx/lynx.cfg -lss=~/.lynx/lynx.lss -vikeys'
 # alias vifm='./.config/vifm/scripts/vifmrun'
 alias v='vifm'
@@ -284,9 +285,8 @@ alias tips="lbrynet txo spend --type=support --is_not_my_input --blocking"
 alias mocp="bash -c mocp"
 
 #Start X at login (handled in bash before fish is started)
- if status is-interactive
-     if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-         exec startx -- -keeptty
-     end
+if status is-interactive
+    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+        exec startx -- -keeptty
+    end
 end
-
