@@ -130,8 +130,6 @@ alias sdn="shutdown now"
 
 # Nvidia issue toggle auto-login and 15-monitor.conf
 
-alias manualboot='sudo mv /etc/systemd/system/getty@tty1.service.d/autologin.conf /etc/systemd/system/getty@tty1.service.d/autologin.conf-off | sudo mv /etc/X11/xorg.conf.d/15-monitor.conf /etc/X11/xorg.conf.d/15-monitor.conf-off | echo "Don\'t forget to edit the startx command in config.fish!"'
-alias autoboot='sudo mv /etc/systemd/system/getty@tty1.service.d/autologin.conf-off /etc/systemd/system/getty@tty1.service.d/autologin.conf | sudo mv /etc/X11/xorg.conf.d/15-monitor.conf-off /etc/X11/xorg.conf.d/15-monitor.conf | echo "Don\'t forget to edit the startx command in config.fish!"'
 ## RipDrag with FZF
 alias cv='ripdrag $(fzf)'
 
@@ -165,29 +163,32 @@ alias lt='eza -aT --color=always --group-directories-first --level=3' # tree lis
 alias tree='tree -C --dirsfirst' #Colorized tree with Directories first
 alias l.='eza -a | grep -E "^\."'
 
-# pacman and yay
-alias pacsyu='sudo pacman -Syu' # update only standard pkgs
-alias pacsyyu='sudo pacman -Syyu' # Refresh pkglist & update standard pkgs
-alias yaysua='yay -Sua --noconfirm' # update only AUR pkgs (yay)
-alias yaysyu='yay -Syu --noconfirm' # update standard pkgs and AUR pkgs (yay)
-alias parsua='paru -Sua --noconfirm' # update only AUR pkgs (paru)
-alias parsyu='paru -Syu --noconfirm' # update standard pkgs and AUR pkgs (paru)
-alias unlock='sudo rm /var/lib/pacman/db.lck' # remove pacman lock
-alias cleanup='sudo pacman -Rns (pacman -Qtdq)' # remove orphaned packages### FZF
-# Pacman
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --exact +s'
-alias pacman_install="sudo pacman -S \$(pacman -Sl|awk '{print \$2}'|fzf -m)"
-alias pacman_uninstall="sudo pacman -Rcs \$(pacman -Q|awk '{print \$1}'|fzf -m)"
-alias pacman_update='sudo pacman -Syyu'
-# Yay
-alias paru_install="paru -S \$(paru -Sl|awk '{print \$2}'|fzf -m)"
-alias paru_uninstall="paru -Rcs \$(paru -Q|awk '{print \$1}'|fzf -m)"
+# # pacman and yay
+# alias pacsyu='sudo pacman -Syu' # update only standard pkgs
+# alias pacsyyu='sudo pacman -Syyu' # Refresh pkglist & update standard pkgs
+# alias yaysua='yay -Sua --noconfirm' # update only AUR pkgs (yay)
+# alias yaysyu='yay -Syu --noconfirm' # update standard pkgs and AUR pkgs (yay)
+# alias parsua='paru -Sua --noconfirm' # update only AUR pkgs (paru)
+# alias parsyu='paru -Syu --noconfirm' # update standard pkgs and AUR pkgs (paru)
+# alias unlock='sudo rm /var/lib/pacman/db.lck' # remove pacman lock
+# alias cleanup='sudo pacman -Rns (pacman -Qtdq)' # remove orphaned packages### FZF
+# # Pacman
+# export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --exact +s'
+# alias pacman_install="sudo pacman -S \$(pacman -Sl|awk '{print \$2}'|fzf -m)"
+# alias pacman_uninstall="sudo pacman -Rcs \$(pacman -Q|awk '{print \$1}'|fzf -m)"
+# alias pacman_update='sudo pacman -Syyu'
+# # Yay
+# alias paru_install="paru -S \$(paru -Sl|awk '{print \$2}'|fzf -m)"
+# alias paru_uninstall="paru -Rcs \$(paru -Q|awk '{print \$1}'|fzf -m)"
 
-# get fastest mirrors
-alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
-alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
-alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
-alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
+# # get fastest mirrors
+# alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
+# alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
+# alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
+# alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
+
+alias pbcopy='xsel --input --clipboard'
+alias pbpaste='xsel --output --clipboard'
 
 # Colorize grep output (good for log files)
 alias grep='grep --color=auto'
@@ -202,11 +203,11 @@ alias rm='rm -i'
 # adding flags
 alias df='df -h' # human-readable sizes
 alias free='free -m' # show sizes in MB
-alias lynx='lynx -cfg=~/.lynx/lynx.cfg -lss=~/.lynx/lynx.lss -vikeys'
+# alias lynx='lynx -cfg=~/.lynx/lynx.cfg -lss=~/.lynx/lynx.lss -vikeys'
 # alias vifm='./.config/vifm/scripts/vifmrun'
 alias v='vifm'
-alias ncmpcpp='ncmpcpp ncmpcpp_directory=$HOME/.config/ncmpcpp/'
-alias mocp='mocp -M "$XDG_CONFIG_HOME"/moc -O MOCDir="$XDG_CONFIG_HOME"/moc'
+# alias ncmpcpp='ncmpcpp ncmpcpp_directory=$HOME/.config/ncmpcpp/'
+# alias mocp='mocp -M "$XDG_CONFIG_HOME"/moc -O MOCDir="$XDG_CONFIG_HOME"/moc'
 
 # ps
 alias psa="ps auxf"
@@ -225,7 +226,7 @@ alias checkout='git checkout'
 alias clone='git clone'
 alias commit='git commit -m'
 alias fetch='git fetch'
-alias pull='git pull origin'
+alias pull='git pull origin --rebase'
 alias push='git push origin'
 alias tag='git tag'
 alias newtag='git tag -a'
@@ -246,9 +247,9 @@ alias gpg-check="gpg2 --keyserver-options auto-key-retrieve --verify"
 alias gpg-retrieve="gpg2 --keyserver-options auto-key-retrieve --receive-keys"
 
 # Play audio files in current dir by type
-alias playwav='deadbeef *.wav'
-alias playogg='deadbeef *.ogg'
-alias playmp3='deadbeef *.mp3'
+# alias playwav='deadbeef *.wav'
+# alias playogg='deadbeef *.ogg'
+# alias playmp3='deadbeef *.mp3'
 
 # Play video files in current dir by type
 alias playavi='vlc *.avi'
@@ -285,8 +286,8 @@ alias tips="lbrynet txo spend --type=support --is_not_my_input --blocking"
 alias mocp="bash -c mocp"
 
 #Start X at login (handled in bash before fish is started)
-if status is-interactive
-    if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
-        exec startx -- -keeptty
-    end
-end
+# if status is-interactive
+#     if test -z "$DISPLAY" -a "$XDG_VTNR" = 1
+#         exec startx -- -keeptty
+#     end
+# end

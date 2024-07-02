@@ -13,7 +13,7 @@ set sort=+dir,+iname,-mode
 set tabscope=pane
 set relativenumber number
 set dirsize=nitems
-set vicmd=hx
+set vicmd=nvim
 set syscalls
 set dotdirs=
 

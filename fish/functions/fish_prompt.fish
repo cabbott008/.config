@@ -33,16 +33,16 @@ function fish_prompt
 
         set_color normal
         set_color $retc
-	# echo -n ' - '
+        # echo -n ' - '
         set_color -o green
-	echo -n '['
+        echo -n '['
         set_color normal
         test -n $field_name
         and echo -n $field_name:
         set_color $retc
         echo -n $field_value
         set_color -o green
-	echo -n ']'
+        echo -n ']'
     end
 
     set_color $retc
@@ -67,7 +67,7 @@ function fish_prompt
                 set mode (set_color --bold green)I
             case replace_one
                 set mode (set_color --bold green)R
-		# echo '[R]'
+                # echo '[R]'
             case replace
                 set mode (set_color --bold cyan)R
             case visual
@@ -97,7 +97,7 @@ function fish_prompt
     echo -n (prompt_hostname)
     set_color -o yellow
     echo -n ' in '
-    set_color -o white 
+    set_color -o white
     echo -n (prompt_pwd -D 24)' '
     set_color -o green
 
@@ -116,7 +116,7 @@ function fish_prompt
     type -q acpi
     and test (acpi -a 2> /dev/null | string match -r off)
     and _nim_prompt_wrapper $retc B (acpi -b | cut -d' ' -f 4-)
-    
+
     # New line
     echo
 

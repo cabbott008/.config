@@ -1,7 +1,0 @@
-confirm_os_window_close 0
-include Constant_Perceptual_Luminosity_dark
-
-# BEGIN_KITTY_THEME
-# Gruvbox Dark
-include current-theme.conf
-# END_KITTY_THEME

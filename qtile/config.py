@@ -6,9 +6,9 @@ import subprocess
 # from libqtile import qtile
 # from typing import List  # noqa: F401
 from libqtile.config import Drag, Group, Key, Screen, Match  # Rule, Click
-from libqtile.command import lazy
+# from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
-# from libqtile.lazy import lazy
+from libqtile.lazy import lazy
 # from libqtile.widget import Spacer
 
 # mod4 or mod = super key
@@ -334,27 +334,32 @@ def init_widgets_list():
 
 
 # Screens
-def init_widgets_screen1():
-
-    widgets_screen1 = init_widgets_list()
-    return widgets_screen1
-
-
 def init_widgets_screen2():
+
     widgets_screen2 = init_widgets_list()
-    widgets_screen2.pop()
     return widgets_screen2
+
+
+def init_widgets_screen1():
+    widgets_screen1 = init_widgets_list()
+    widgets_screen1.pop()
+    return widgets_screen1
 
 
 def init_screens():
     return [Screen(bottom=bar.Bar(widgets=init_widgets_screen1(),
                                   size=48,
-                                  opacity=0.8)),
+                                  opacity=0.8),
+                   wallpaper='~/.config/qtile/1-Monitor.jpg',
+                   wallpaper_mode='fill'
+                   ),
             Screen(bottom=bar.Bar(widgets=init_widgets_screen2(),
                                   size=48,
-                                  opacity=0.8)),
+                                  opacity=0.8),
+                   wallpaper='~/.config/qtile/2-Main.jpg',
+                   wallpaper_mode='fill'
+                   ),
             ]
-
 
 screens = init_screens()
 widgets_list = init_widgets_list()
@@ -375,7 +380,7 @@ main = None
 @hook.subscribe.startup_once
 def start_once():
     home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/scripts/autostart.sh'])
+    subprocess.call([home + '/.config/autostart.sh'])
 
 
 @hook.subscribe.startup
@@ -406,6 +411,7 @@ floating_layout = layout.Floating(float_rules=[
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
     Match(wm_class='confirm'),
+    Match(wm_class='Zoom Workplace'),
     Match(wm_class='dialog'),
     Match(wm_class='download'),
     Match(wm_class='error'),
@@ -421,34 +427,15 @@ floating_layout = layout.Floating(float_rules=[
 
 ],  fullscreen_border_width=0, border_width=0)
 
+# Qtile defaults to left_ptr, this allows custom
+from libqtile import hook
+@hook.subscribe.startup
+def runner():
+    import subprocess
+    subprocess.Popen(['xsetroot', '-cursor_name', 'left_ptr'])
+
 auto_fullscreen = True
 focus_on_window_activation = "smart"  # or focus
 reconfigure_screens = True
 
 wmname = "Qtile"
-
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
